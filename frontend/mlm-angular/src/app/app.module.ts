@@ -14,7 +14,8 @@ import { RegisterscreenComponent } from './pages/registerscreen/registerscreen.c
   ],
   imports: [
     BrowserModule,
-    AppRoutingModule
+    AppRoutingModule,
+    
   ],
   providers: [],
   bootstrap: [AppComponent]
