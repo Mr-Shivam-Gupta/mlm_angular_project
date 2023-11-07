@@ -9,8 +9,7 @@ import { Router } from '@angular/router';
 export class RegisterscreenComponent {
   constructor(private router: Router) {}
 
-  onSignupSuccess() {
-    
+  onSignupSuccess() {  
     this.router.navigate(['/login']); 
   }
 }
