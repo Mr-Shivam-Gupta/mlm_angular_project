@@ -9,12 +9,12 @@ import { Router } from '@angular/router';
 })
 export class LoginComponent {
 
+  constructor(private authService: AuthService, private router: Router) {} // Inject the Router service here
 
- 
+  onSignupSuccess() {
+    this.router.navigate(['/signup']); // Corrected function body with curly braces
+  }
 
-  constructor(private authService: AuthService) {}
-  onSignupSuccess() {  
-    this.router.navigate(['/signup']); 
   username: string = '';
   password: string = '';
   rememberMe: boolean = false;
@@ -30,6 +30,5 @@ export class LoginComponent {
         console.error('Authentication error:', error);
       }
     );
->>>>>>> 9e0ac5a34d4580ed3818c8e969a52707f6b4ee50
   }
 }
