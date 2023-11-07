@@ -1,0 +1,107 @@
+<section class="content">
+    <div class="content-block">
+      <div class="block-header">
+        <!-- breadcrumb -->
+        <app-breadcrumb [title]="dtitle" [items]="['Team']" [active_item]="'Level Team'"></app-breadcrumb>
+      </div>
+      <div class="row">
+        <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
+          <div class="card">
+            <div class="materialTableHeader">
+              <div class="left">
+                <ul class="header-buttons-left ms-0">
+                  <li class="tbl-title">
+                    <h2>Level Team</h2>
+                  </li>
+                
+                </ul>
+                
+              </div>
+              <div class="right">
+                <ul>
+                  
+                     <li class="tbl-title">
+                        <mat-form-field>
+                        <mat-select [(value)]="level" (selectionChange)="loadData()" [(ngModel)]="level">
+                            <mat-option [value]="0">All Level</mat-option>
+                            <mat-option [value]="option"   *ngFor="let option of levels">Level {{ option }}</mat-option>
+                          </mat-select>
+                        </mat-form-field>
+                     </li>
+                </ul>
+              </div>
+            </div>
+            <div class="body overflow-auto">
+                <div class="responsive_table">
+                <table mat-table [dataSource]="dataSource" class="mat-cell advance-table">
+
+                    <!--- Note that these columns can be defined in any order.
+                          The actual rendered columns are set as a property on the row definition" -->
+                  
+                    <!-- Position Column 
+                    <ng-container matColumnDef="position">
+                      <th mat-header-cell *matHeaderCellDef> No. </th>
+                      <td mat-cell *matCellDef="let element"> {{element.position}} </td>
+                    </ng-container>-->
+                  
+                    <ng-container matColumnDef="side">
+                        <mat-header-cell *matHeaderCellDef mat-sort-header>Sr.
+                        </mat-header-cell>
+                        <mat-cell *matCellDef="let element; let i = index;">
+                          <span class="mobile-label">Sr.:</span>{{(pageSize*pageIndex)+(i+1)}}</mat-cell>
+                      </ng-container>
+                    <ng-container matColumnDef="userid">
+                        <mat-header-cell *matHeaderCellDef mat-sort-header>User Id
+                        </mat-header-cell>
+                        <mat-cell *matCellDef="let row">
+                          <span class="mobile-label">User Id:</span>{{row.userid}}</mat-cell>
+                      </ng-container>
+                  
+                    <ng-container matColumnDef="name">
+                        <mat-header-cell *matHeaderCellDef mat-sort-header>Name
+                        </mat-header-cell>
+                        <mat-cell *matCellDef="let row">
+                          <span class="mobile-label">Name:</span>{{row.name}}</mat-cell>
+                      </ng-container>
+                  
+                   
+                  
+                      <ng-container matColumnDef="doj">
+                        <mat-header-cell *matHeaderCellDef mat-sort-header>DOJ
+                        </mat-header-cell>
+                        <mat-cell *matCellDef="let row">
+                          <span class="mobile-label">DOJ:</span>{{row.doj|date:'dd/MM/yyyy'}}</mat-cell>
+                      </ng-container>
+
+                    
+
+                      <ng-container matColumnDef="investment">
+                        <mat-header-cell *matHeaderCellDef mat-sort-header>Investment
+                        </mat-header-cell>
+                        <mat-cell *matCellDef="let row">
+                          <span class="mobile-label">Investment:</span>{{row.investment}}</mat-cell>
+                      </ng-container>
+
+                      <ng-container matColumnDef="level" >
+                        <mat-header-cell *matHeaderCellDef mat-sort-header [hidden]="level > 0">Level
+                        </mat-header-cell>
+                        <mat-cell *matCellDef="let row" [hidden]="level > 0">
+                          <span class="mobile-label">Level:</span>{{row.level}}</mat-cell>
+                      </ng-container>
+                  
+                      <mat-header-row *matHeaderRowDef="displayedColumns"></mat-header-row>
+                      <mat-row *matRowDef="let row; columns: displayedColumns;" 
+                        [style.cursor]="'pointer'"  matRipple>
+                      </mat-row>
+                  </table>
+                  </div>
+                  
+              <mat-paginator #paginator [length]="totalRows" [pageIndex]="0" [pageSize]="10"
+                [pageSizeOptions]="[5, 10, 25, 100]" (page)="handlePageEvent($event)" >
+              </mat-paginator>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>

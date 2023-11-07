@@ -1,0 +1,31 @@
+/*
+ *  Document   : listitems.scss
+ *  Author     : RedStar Template
+ *  Description: This scss file for media object style classes
+ */
+.icon-box {
+  position: relative;
+  line-height: 1;
+  padding: 8px;
+  border-radius: 5px;
+}
+.icon-box-orange {
+  background-color: #ffe3db;
+}
+.icon-box-green {
+  background-color: #e1fbe2;
+}
+.icon-box-purple {
+  background-color: #dfceff;
+}
+.icon-box-blue {
+  background-color: #cbe8ff;
+}
+.icon-box-red {
+  background-color: #ffe5e4;
+}
+.amount-section {
+  .material-icons {
+    font-size: 10px;
+  }
+}

@@ -1,0 +1,100 @@
+<div class="addContainer">
+    <div class="modalHeader">
+      <div class="editRowModal">
+        <div class="modalHeader clearfix">
+          
+          <div class="modal-about">
+            Topup
+          </div>
+        </div>
+      </div>
+      <button mat-icon-button (click)="dialogRef.close()" class="modal-close-button" aria-label="Close dialog">
+        <mat-icon>close</mat-icon>
+      </button>
+    </div>
+    <div mat-dialog-content>
+      <form class="register-form m-6" >
+        <div class="row">
+          <div class="col-xl-12 col-lg-12 col-md-12 col-sm-12 mb-4">
+            <mat-form-field class="example-full-width" appearance="outline" >
+              <mat-label>Topup Amount</mat-label>
+              <!-- <input matInput [(ngModel)]="topupamt" name="topupamt" id="topupamt" type="text" > -->
+              <mat-select  [disabled]="generated" [(ngModel)]="topupamt" name="topupamt" id="topupamt">
+                <mat-option *ngFor="let plan of plans" [value]="plan.planvalue">{{plan.planname}}</mat-option>
+              
+              </mat-select>
+              <div matSuffix>
+<button mat-button color="primary" [disabled]="generated" (click)="topup($event)">
+                Generate
+            </button>
+              </div>
+              
+             
+            </mat-form-field>
+           
+          </div>
+          
+        </div>
+
+        <div class="row">
+          <div class="col-xl-12 col-lg-12 col-md-12 col-sm-12 mb-4">
+            <mat-form-field class="example-full-width" appearance="outline" subscriptSizing="dynamic">
+              <mat-label>Retopup Balance</mat-label>
+              <input matInput [(ngModel)]="topupbalance" readonly="" name="topupbalance" id="topupbalance" type="text" >
+              
+              
+             
+            </mat-form-field>
+           
+          </div>
+          
+        </div>
+
+        <div class="row">
+          <div class="col-xl-12 col-lg-12 col-md-12 col-sm-12 mb-4">
+            <mat-form-field class="example-full-width" appearance="outline" subscriptSizing="dynamic">
+              <mat-label>Payment Amount</mat-label>
+              <input matInput [(ngModel)]="tronamt" readonly="" name="tronamt" id="tronamt" type="text" >
+              
+              
+             
+            </mat-form-field>
+           
+          </div>
+          
+        </div>
+
+        <div class="row">
+          <div class="col-xl-12 col-lg-12 col-md-12 col-sm-12 mb-4">
+            <mat-form-field class="example-full-width" appearance="outline" subscriptSizing="dynamic">
+              <mat-label>Payment Address</mat-label>
+              <input matInput [(ngModel)]="address" readonly="" name="address" id="address" type="text" >
+              
+              
+             
+            </mat-form-field>
+           
+          </div>
+          
+        </div>
+
+       
+       
+        <div class="row">
+          <div class="col-xl-6 col-lg-6 col-md-6 col-sm-6">
+            <div mat-dialog-actions align="start" >
+             <!-- *ngIf="address.length > 0" -->
+              <button mat-raised-button color="primary" align="end" (click)="copyAddress()"  tabindex="-1">Copy</button>
+            </div>
+          </div>
+          <div class="col-xl-6 col-lg-6 col-md-6 col-sm-6">
+            <div mat-dialog-actions align="end" >
+             
+              <button mat-raised-button color="warn" align="end" (click)="onNoClick()"  tabindex="-1">Close</button>
+            </div>
+          </div>
+        </div>
+      </form>
+    </div>
+  </div>
+  

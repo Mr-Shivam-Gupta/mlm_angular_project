@@ -1,0 +1,260 @@
+<section class="content">
+  <div class="content-block">
+    <div class="block-header">
+      <!-- breadcrumb -->
+      <app-breadcrumb [title]="'Table'" [items]="['Home']" [active_item]="'Table'"></app-breadcrumb>
+    </div>
+    <div class="alert alert-info">
+      Advance table component is develop using Angular Material Table. Main
+      features are:<br><br>
+      <ul class="fa-ul">
+        <li class="font-15"><span class="fa-li"><i class="fas fa-angle-double-right"></i></span>Searching
+          Records In Table
+        </li>
+        <li class="font-15"><span class="fa-li"><i class="fas fa-angle-double-right"></i></span>Sorting Records
+          In Table
+        </li>
+        <li class="font-15"><span class="fa-li"><i class="fas fa-angle-double-right"></i></span>Add, Update,
+          Delete In Table Record
+        </li>
+        <li class="font-15"><span class="fa-li"><i class="fas fa-angle-double-right"></i></span>Row Click Edit
+          Table Record
+        </li>
+        <li class="font-15"><span class="fa-li"><i class="fas fa-angle-double-right"></i></span>Context Menu,
+          And Nested Context Menu
+        </li>
+        <li class="font-15"><span class="fa-li"><i class="fas fa-angle-double-right"></i></span>Crud Operations
+          Using Context Menu </li>
+        <li class="font-15"><span class="fa-li"><i class="fas fa-angle-double-right"></i></span>Multi select row
+          using checkbox </li>
+        <li class="font-15"><span class="fa-li"><i class="fas fa-angle-double-right"></i></span>Multiple delete
+          rows using checkbox </li>
+        <li class="font-15"><span class="fa-li"><i class="fas fa-angle-double-right"></i></span>Refresh Table
+          Data</li>
+        <li class="font-15"><span class="fa-li"><i class="fas fa-angle-double-right"></i></span>Pagination
+          Supported</li>
+        <li class="font-15"><span class="fa-li"><i class="fas fa-angle-double-right"></i></span>Row Per Page
+          Options</li>
+        <li class="font-15"><span class="fa-li"><i class="fas fa-angle-double-right"></i></span>Export table data in
+          xlsx format</li>
+      </ul>
+    </div>
+    <div class="row">
+      <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
+        <div class="card">
+          <div class="materialTableHeader">
+            <div class="left">
+              <ul class="header-buttons-left ms-0">
+                <li class="tbl-title">
+                  <h2>Table Name</h2>
+                </li>
+                <li class="tbl-search-box">
+                  <label for="search-input"><i class="material-icons search-icon">search</i></label>
+                  <input placeholder="Search" type="text" #filter class="browser-default search-field"
+                    aria-label="Search box">
+                </li>
+              </ul>
+            </div>
+            <div class="right">
+              <ul class="tbl-export-btn">
+                <li class="tbl-header-btn">
+                  <div class="m-l-10" matTooltip="ADD">
+                    <button mat-mini-fab color="primary" (click)="addNew()">
+                      <mat-icon class="col-white">add</mat-icon>
+                    </button>
+                  </div>
+                </li>
+                <li class="tbl-header-btn">
+                  <div class="m-l-10" matTooltip="REFRESH">
+                    <button mat-mini-fab color="primary" (click)="refresh()">
+                      <mat-icon class="col-white">refresh</mat-icon>
+                    </button>
+                  </div>
+                </li>
+                <li class="tbl-header-btn">
+                  <div class="m-l-10" [hidden]=!selection.hasValue() matTooltip="DELETE">
+                    <button mat-mini-fab color="warn" (click)="removeSelectedRows()">
+                      <mat-icon class="col-white">delete
+                      </mat-icon>
+                    </button>
+                  </div>
+                </li>
+                <li>
+                  <div class="export-button m-l-10" matTooltip="XLSX">
+                    <img src="assets/images/icons/xlsx.png" alt="" (click)="exportExcel()" />
+                  </div>
+                </li>
+              </ul>
+            </div>
+          </div>
+          <div class="body overflow-auto">
+            <div class="responsive_table">
+              <table mat-table [dataSource]="dataSource" matSort class="mat-cell advance-table">
+                <!-- Checkbox Column -->
+                <ng-container matColumnDef="select">
+                  <mat-header-cell *matHeaderCellDef [ngClass]="'tbl-col-width-per-6'">
+                    <mat-checkbox (change)="$event ? masterToggle() : null"
+                      [checked]="selection.hasValue() && isAllSelected()"
+                      [indeterminate]="selection.hasValue() && !isAllSelected()" [ngClass]="'tbl-checkbox'">
+                    </mat-checkbox>
+                  </mat-header-cell>
+                  <mat-cell *matCellDef="let row" [ngClass]="'tbl-col-width-per-6'">
+                    <mat-checkbox (click)="$event.stopPropagation()" (change)="$event ? selection.toggle(row) : null"
+                      [checked]="selection.isSelected(row)" [ngClass]="'tbl-checkbox'">
+                    </mat-checkbox>
+                  </mat-cell>
+                </ng-container>
+                <!-- ID Column -->
+                <ng-container matColumnDef="id">
+                  <mat-header-cell *matHeaderCellDef mat-sort-header>Id</mat-header-cell>
+                  <mat-cell *matCellDef="let row">{{row.id}}</mat-cell>
+                </ng-container>
+                <ng-container matColumnDef="img">
+                  <mat-header-cell mat-header-cell *matHeaderCellDef [ngClass]="'tbl-col-width-per-7'"> Image
+                  </mat-header-cell>
+                  <mat-cell mat-cell *matCellDef="let row" class="table-img tbl-col-width-per-7"><span
+                      class="mobile-label">Image:</span>
+                    <img [src]="row.img" />
+                  </mat-cell>
+                </ng-container>
+                <ng-container matColumnDef="fName">
+                  <mat-header-cell *matHeaderCellDef mat-sort-header>First Name
+                  </mat-header-cell>
+                  <mat-cell *matCellDef="let row" (contextmenu)="onContextMenu($event, row)">
+                    <span class="mobile-label">First Name:</span>{{row.fName}}</mat-cell>
+                </ng-container>
+                <ng-container matColumnDef="lName">
+                  <mat-header-cell *matHeaderCellDef mat-sort-header>Last Name
+                  </mat-header-cell>
+                  <mat-cell *matCellDef="let row" (contextmenu)="onContextMenu($event, row)">
+                    <span class="mobile-label">Last Name:</span>{{row.lName}}</mat-cell>
+                </ng-container>
+                <ng-container matColumnDef="email">
+                  <mat-header-cell *matHeaderCellDef mat-sort-header>Email</mat-header-cell>
+                  <mat-cell *matCellDef="let row" (contextmenu)="onContextMenu($event, row)">
+                    <span class="mobile-label">Email:</span> {{row.email}}</mat-cell>
+                </ng-container>
+                <ng-container matColumnDef="gender">
+                  <mat-header-cell *matHeaderCellDef mat-sort-header> Gender
+                  </mat-header-cell>
+                  <mat-cell mat-cell *matCellDef="let row" (contextmenu)="onContextMenu($event, row)">
+                    <span class="mobile-label">Gender:</span>
+                    <div *ngIf="row.gender==='Male'">
+                      <span class="badge badge-solid-green">
+                        {{row.gender}}</span>
+                    </div>
+                    <div *ngIf="row.gender==='Female'">
+                      <span class="badge badge-solid-purple">
+                        {{row.gender}}</span>
+                    </div>
+                  </mat-cell>
+                </ng-container>
+                <ng-container matColumnDef="bDate">
+                  <mat-header-cell *matHeaderCellDef mat-sort-header>Birth Date</mat-header-cell>
+                  <mat-cell *matCellDef="let row" (contextmenu)="onContextMenu($event, row)">
+                    <span class="mobile-label">Birth Date:</span> {{row.bDate | date: 'MM/dd/yyyy' }}
+                  </mat-cell>
+                </ng-container>
+                <ng-container matColumnDef="mobile">
+                  <mat-header-cell *matHeaderCellDef mat-sort-header>Mobile</mat-header-cell>
+                  <mat-cell *matCellDef="let row" (contextmenu)="onContextMenu($event, row)">
+                    <span class="mobile-label">Mobile:</span> {{row.mobile}}</mat-cell>
+                </ng-container>
+                <ng-container matColumnDef="address">
+                  <mat-header-cell *matHeaderCellDef mat-sort-header>Address
+                  </mat-header-cell>
+                  <mat-cell *matCellDef="let row" (contextmenu)="onContextMenu($event, row)"
+                    matTooltip="{{row.address}}">
+                    <span class="truncate-text"><span class="mobile-label">Address:</span> {{row.address}}</span>
+                  </mat-cell>
+                </ng-container>
+                <ng-container matColumnDef="country">
+                  <mat-header-cell *matHeaderCellDef mat-sort-header>Country</mat-header-cell>
+                  <mat-cell *matCellDef="let row" (contextmenu)="onContextMenu($event, row)">
+                    <span class="mobile-label">Country:</span> {{row.country}}</mat-cell>
+                </ng-container>
+                <!-- actions -->
+                <ng-container matColumnDef="actions">
+                  <mat-header-cell class="pr-0" *matHeaderCellDef>Actions</mat-header-cell>
+                  <mat-cell *matCellDef="let row; let i=index;" class="pr-0">
+                    <button mat-icon-button color="accent" (click)="$event.stopPropagation()" (click)="editCall(row)"
+                      class="tbl-action-btn">
+                      <app-feather-icons [icon]="'edit'" [class]="'tbl-fav-edit'"></app-feather-icons>
+                    </button>
+                    <button mat-icon-button color="accent" (click)="$event.stopPropagation()" (click)="deleteItem(row)"
+                      class="tbl-action-btn">
+                      <app-feather-icons [icon]="'trash-2'" [class]="'tbl-fav-delete'"></app-feather-icons>
+                    </button>
+                  </mat-cell>
+                </ng-container>
+                <mat-header-row *matHeaderRowDef="displayedColumns"></mat-header-row>
+                <mat-row *matRowDef="let row; columns: displayedColumns;" (click)="editCall(row)"
+                  [style.cursor]="'pointer'" matRipple>
+                </mat-row>
+              </table>
+            </div>
+            <!-- Loading spinner -->
+            <div *ngIf="exampleDatabase?.isTblLoading" class="tbl-spinner">
+              <mat-progress-spinner color="primary" [diameter]="40" mode="indeterminate">
+              </mat-progress-spinner>
+            </div>
+            <!-- context menu start -->
+            <div style="visibility: hidden; position: fixed" [style.left]="contextMenuPosition.x"
+              [style.top]="contextMenuPosition.y" [matMenuTriggerFor]="contextMenu">
+            </div>
+            <mat-menu #contextMenu="matMenu">
+              <ng-template matMenuContent let-item="item">
+                <button mat-menu-item (click)="addNew()">
+                  <mat-icon>add_box</mat-icon>
+                  <span>Add Record</span>
+                </button>
+                <button mat-menu-item (click)="editCall(item)">
+                  <mat-icon>create</mat-icon>
+                  <span>Edit Record</span>
+                </button>
+                <button mat-menu-item (click)="deleteItem(item)">
+                  <mat-icon>delete</mat-icon>
+                  <span>Delete Record</span>
+                </button>
+                <button mat-menu-item (click)="refresh()">
+                  <mat-icon>refresh</mat-icon>
+                  <span>Refresh Record</span>
+                </button>
+                <button mat-menu-item disabled>
+                  <mat-icon>no_encryption</mat-icon>
+                  <span>Disable</span>
+                </button>
+                <button mat-menu-item [matMenuTriggerFor]="nestedmenu">
+                  <mat-icon>list_alt</mat-icon>
+                  <span> Nested Menu</span>
+                </button>
+              </ng-template>
+            </mat-menu>
+            <mat-menu #nestedmenu="matMenu">
+              <button mat-menu-item>
+                <mat-icon>mail_outline</mat-icon>
+                <span>Item 1</span>
+              </button>
+              <button mat-menu-item>
+                <mat-icon>call</mat-icon>
+                <span>Item 2</span>
+              </button>
+              <button mat-menu-item>
+                <mat-icon>chat</mat-icon>
+                <span>Item 3</span>
+              </button>
+            </mat-menu>
+            <!-- context menu end -->
+            <div *ngIf="!exampleDatabase?.isTblLoading" class="no-results"
+              [style.display]="dataSource.renderedData.length === 0 ? '' : 'none'">
+              No results
+            </div>
+            <mat-paginator #paginator [length]="dataSource.filteredData.length" [pageIndex]="0" [pageSize]="10"
+              [pageSizeOptions]="[5, 10, 25, 100]">
+            </mat-paginator>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>

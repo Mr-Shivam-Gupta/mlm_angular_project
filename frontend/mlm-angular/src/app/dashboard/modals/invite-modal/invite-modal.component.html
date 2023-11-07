@@ -1,0 +1,64 @@
+<div class="addContainer">
+    <div class="modalHeader">
+      <div class="editRowModal">
+        <div class="modalHeader clearfix">
+          
+          <div class="modal-about">
+            Refer Your Friend
+          </div>
+        </div>
+      </div>
+      <button mat-icon-button (click)="dialogRef.close()" class="modal-close-button" aria-label="Close dialog">
+        <mat-icon>close</mat-icon>
+      </button>
+    </div>
+    <div mat-dialog-content>
+      <form class="register-form m-6">       
+
+        <div class="row">
+          <div class="col-xl-12 col-lg-12 col-md-12 col-sm-12 mb-12">
+            <mat-form-field class="example-full-width" appearance="outline" subscriptSizing="dynamic">
+              <mat-label>Referral Address</mat-label>
+              <input matInput [(ngModel)]="address" readonly="" name="address" id="address" type="text" >
+              
+              
+             
+            </mat-form-field>
+           
+          </div>
+          
+        </div>
+
+        <div class="row">
+          <div class="col-xl-12 col-lg-12 col-md-12 col-sm-12 mb-12">
+           
+            <share-buttons theme="modern-dark"
+            [include]="['copy', 'facebook', 'email', 'messenger', 'linkedin', 'sms', 'telegram', 'tumblr', 'twitter', 'whatsapp']"
+            [showIcon]="false"
+            [showText]="true"
+            url="{{address}}"
+            description="Join demo domain "
+            
+            class="pt-5">
+          </share-buttons>
+          </div>
+          
+        </div>
+       
+        <div class="row">
+          <div class="col-xl-6 col-lg-6 col-md-12 col-sm-12 mb-12">
+            <div class="example-button-row">
+             
+              </div>
+          </div>
+          <div class="col-xl-6 col-lg-6 col-md-12 col-sm-12 mb-12">
+            <div mat-dialog-actions align="end" >
+             
+              <button mat-raised-button color="warn" align="end" (click)="onNoClick()"  tabindex="-1">Close</button>
+            </div>
+          </div>
+        </div>
+      </form>
+    </div>
+  </div>
+  

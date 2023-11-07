@@ -1,0 +1,539 @@
+@use "sass:math";
+
+@function rem($size) {
+  $remSize: math.div($size, 16px);
+  @return #{$remSize}rem;
+}
+
+.board {
+  height: 100%;
+  max-width: 100%;
+  background-color: #ffffff;
+  float: none;
+  box-shadow: none;
+  .list {
+    flex: 1 0 0;
+    margin: rem(16px) 0;
+    border-radius: rem(5px);
+    box-shadow: 0 rem(2px) rem(2px) rgba(#000, 0.03),
+      0 rem(1px) rem(5px) rgba(#000, 0.02);
+    overflow: hidden;
+    .header {
+      display: flex;
+      padding: rem(18px) rem(14px);
+      background: #ffffff;
+      align-items: center;
+      .title {
+        flex: 1;
+        text-align: center;
+        h2 {
+          margin: 0 0 rem(6px);
+          font-weight: 500;
+          font-size: 18px;
+          line-height: 1;
+        }
+        .count {
+          font-size: rem(14px);
+          line-height: 1;
+          opacity: 0.65;
+        }
+      }
+    }
+    .projects {
+      margin: 0;
+      padding: rem(14px);
+      list-style: none;
+      &.cdk-drop-list-dragging {
+        opacity: 0.65;
+      }
+      .cdk-drag-placeholder {
+        display: none;
+      }
+    }
+  }
+}
+
+.project {
+  cursor: pointer;
+  list-style: none;
+  padding: rem(16px);
+  background: #ffffff;
+  transition: box-shadow 0.2s;
+  min-height: 50px;
+  position: relative;
+  margin-bottom: 24px;
+  border: 1px solid #d1d1d1;
+  border-radius: 10px;
+  box-shadow: 0 0 10px 0 rgba(183, 192, 206, 0.2);
+  -webkit-box-shadow: 0 0 10px 0 rgba(183, 192, 206, 0.2);
+
+  &:hover {
+    box-shadow: 0 rem(2px) rem(2px) rgba(#000, 0.1),
+      0 rem(1px) rem(5px) rgba(#000, 0.09);
+  }
+  &:last-child {
+    margin-bottom: 0;
+  }
+  &:not(.project-list-add) {
+    padding-right: rem(32px);
+  }
+
+  h3 {
+    margin: 0 0 rem(4px);
+    font-size: 1em;
+    font-weight: 500;
+  }
+  .description {
+    margin: 0 0 rem(8px);
+  }
+  .gravity {
+    display: flex;
+    font-size: rem(11px);
+    letter-spacing: 1px;
+    text-transform: uppercase;
+    .priority {
+      flex: 1;
+    }
+    .deadline {
+      margin-right: rem(-16px);
+      text-align: right;
+      .icon {
+        margin-right: rem(4px);
+        display: inline-block;
+        height: 1em;
+        overflow: visible;
+        font-size: inherit;
+        vertical-align: -0.125em;
+      }
+      .deadline-label {
+        display: none;
+      }
+    }
+  }
+  .project-actions {
+    opacity: 0;
+    position: absolute;
+    top: rem(6px);
+    right: rem(-3px);
+    transition: opacity 0.2s;
+  }
+  .project-actions[aria-expanded="true"],
+  &:hover .project-actions {
+    opacity: 1;
+  }
+}
+
+@media (min-width: 768px) {
+  .board {
+    display: flex;
+    .list {
+      margin: 0;
+      box-shadow: none;
+      border-radius: 0;
+      border-width: 0 0 0 1px;
+      // &:last-child {
+      //   border-right: 1px solid #bbb;
+      // }
+    }
+  }
+}
+
+@media (min-width: 992px) {
+  .project .gravity .deadline .deadline-label {
+    display: inline;
+  }
+}
+
+.wrapper {
+  display: flex;
+  flex-flow: column;
+  height: 100%;
+}
+
+.container {
+  margin: 0 auto;
+  padding: 0 rem(8px);
+  max-width: 1320px;
+}
+
+.header {
+  flex: 0 1 auto;
+  padding: rem(18px) 0;
+  background: linear-gradient(
+    to top,
+    var(--color-purple-heart),
+    var(--color-purple-heart-light)
+  );
+  color: var(--color-white);
+  .container {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+  }
+  h1 {
+    margin: 0;
+    font-size: rem(16px);
+    line-height: 1;
+    font-weight: 500;
+    text-transform: uppercase;
+    letter-spacing: rem(1.5px);
+    a {
+      color: var(--color-white);
+    }
+    svg {
+      position: relative;
+      top: -1px;
+      margin-right: rem(12px);
+      display: inline-block;
+      vertical-align: middle;
+      height: rem(25px);
+    }
+    span {
+      display: inline-block;
+      vertical-align: middle;
+    }
+  }
+}
+
+nav {
+  flex: 0 1 auto;
+  padding: rem(3px) 0;
+  background: var(--color-purple-heart-dark);
+  .container {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+  }
+  .menu {
+    a {
+      display: inline-block;
+      padding: rem(11px) rem(11px) rem(9px);
+      color: var(--color-white);
+      font-weight: 500;
+      text-decoration: none;
+      border-bottom: rem(3px) solid rgba(#fff, 0.5);
+    }
+  }
+  .actions {
+    position: fixed;
+    z-index: 10;
+    right: rem(40px);
+    bottom: rem(40px);
+    button {
+      width: rem(60px);
+      height: rem(60px);
+      padding: 0;
+      background: #1075f2;
+      color: white;
+      border: none;
+      border-radius: 50%;
+      box-shadow: 0 0 rem(20px) rgba(#000, 0.3);
+      cursor: pointer;
+      svg {
+        height: rem(30px);
+      }
+    }
+  }
+}
+
+main {
+  position: relative;
+  flex: 1 1 auto;
+  .container {
+    height: 100%;
+  }
+}
+.project-bedge {
+  font-size: 12px;
+  font-weight: 500;
+  background-color: #d1d3d4;
+  display: inline-flex;
+  cursor: default;
+  user-select: none;
+  border-radius: 3px;
+  padding: 2px 5px;
+  float: right;
+}
+.project-bedge2 {
+  font-size: 12px;
+  font-weight: 500;
+  background-color: #d1d3d4;
+  display: inline-flex;
+  cursor: default;
+  user-select: none;
+  border-radius: 3px;
+  padding: 2px 5px;
+  float: left;
+}
+.project-priority--1 {
+  color: rgb(0, 218, 0);
+  font-weight: 500;
+}
+.project-priority-0 {
+  color: rgb(233, 0, 233);
+  font-weight: 500;
+}
+.project-priority-1 {
+  color: hsl(0, 84%, 31%);
+  font-weight: 500;
+}
+.project-type-Website {
+  background-color: #1075f2;
+  color: #fff;
+}
+.project-type-Android {
+  background-color: #f21023;
+  color: #fff;
+}
+.project-type-IPhone {
+  background-color: #110103;
+  color: #fff;
+}
+.project-type-Testing {
+  background-color: #06a800;
+  color: #fff;
+}
+.pro-left {
+  font-weight: 500;
+  padding: 0px 10px;
+  border-radius: 5px;
+}
+.project-title {
+  font-size: 17px;
+  color: #1f2225;
+}
+.project-icon {
+  font-size: 19px;
+  margin-right: 5px;
+  vertical-align: text-top;
+}
+.project-icon2 {
+  font-size: 16px;
+  margin-right: 5px;
+  vertical-align: text-top;
+}
+.add-icon {
+  font-size: 19px;
+  margin-right: 5px;
+  vertical-align: text-top;
+}
+
+@media (min-width: 576px) {
+  .container {
+    padding: 0 rem(16px);
+  }
+}
+
+.project-people {
+  text-align: right;
+  vertical-align: middle;
+  img {
+    width: 32px;
+    height: 32px;
+  }
+}
+.project-actions {
+  text-align: right;
+  vertical-align: middle;
+}
+.profile-content {
+  border-top: none !important;
+}
+.profile-stats {
+  margin-right: 10px;
+}
+.profile-image {
+  width: 120px;
+  float: left;
+  img {
+    width: 96px;
+    height: 96px;
+  }
+}
+.profile-info {
+  margin-left: 120px;
+}
+.feed-element {
+  padding-bottom: 15px;
+  margin-top: 15px;
+  overflow: hidden;
+  &:first-child {
+    margin-top: 0;
+  }
+  .media {
+    margin-top: 15px;
+  }
+  .well {
+    border: 1px solid #e7eaec;
+    box-shadow: none;
+    background: #f2f3ff;
+    margin-top: 10px;
+    margin-bottom: 5px;
+    padding: 10px 20px;
+    font-size: 11px;
+    line-height: 16px;
+  }
+  .actions {
+    margin-top: 10px;
+  }
+  .photos {
+    margin: 10px 0;
+  }
+  > .pull-left {
+    margin-right: 10px;
+  }
+  img.img-circle {
+    width: 38px;
+    height: 38px;
+  }
+}
+.media-body {
+  overflow: hidden;
+}
+.feed-photo {
+  max-height: 180px;
+  //Instead of the line below you could use @include border-radius($radius, $vertical-radius)
+  border-radius: 4px;
+  overflow: hidden;
+  margin-right: 10px;
+  margin-bottom: 10px;
+}
+.ibox {
+  clear: both;
+  margin-bottom: 25px;
+  margin-top: 0;
+  padding: 0;
+  &.collapsed {
+    .ibox-content {
+      display: none;
+    }
+    .fa {
+      &.fa-chevron-up:before {
+        content: "\f078";
+      }
+      &.fa-chevron-down:before {
+        content: "\f077";
+      }
+    }
+  }
+  &:after {
+    display: table;
+  }
+  &:before {
+    display: table;
+  }
+}
+.ibox-title {
+  background-color: #ffffff;
+  border-color: #e7eaec;
+  //Instead of the line below you could use @include border-image($value)
+  border-image: none;
+  border-style: solid solid none;
+  border-width: 3px 0 0;
+  color: inherit;
+  margin-bottom: 0;
+  padding: 14px 15px 7px;
+  min-height: 48px;
+}
+.ibox-content {
+  background-color: #ffffff;
+  color: inherit;
+  padding: 0px 20px 20px;
+  border-image: none;
+  border-width: 1px 0;
+}
+.ibox-footer {
+  color: inherit;
+  border-top: 1px solid #e7eaec;
+  font-size: 90%;
+  background: #ffffff;
+  padding: 10px 15px;
+}
+dd.project-people {
+  text-align: left;
+  margin-top: 5px;
+}
+.project-title a {
+  font-size: 14px;
+  color: #676a6c;
+  font-weight: 600;
+}
+.project-list table tr td {
+  border-top: none;
+  border-bottom: 1px solid #e7eaec;
+  padding: 15px 10px;
+  vertical-align: middle;
+}
+.project-manager .tag-list li a {
+  font-size: 10px;
+  background-color: white;
+  padding: 5px 12px;
+  color: inherit;
+  //Instead of the line below you could use @include border-radius($radius, $vertical-radius)
+  border-radius: 2px;
+  border: 1px solid #e7eaec;
+  margin-right: 5px;
+  margin-top: 5px;
+  display: block;
+}
+.project-files li a {
+  font-size: 11px;
+  color: #676a6c;
+  margin-left: 10px;
+  line-height: 22px;
+}
+.feed-activity-list {
+  margin: 10px;
+  .feed-element {
+    border-bottom: 1px solid #e7eaec;
+  }
+}
+.dropdown-messages-box img.img-circle {
+  width: 38px;
+  height: 38px;
+}
+.file-list li {
+  padding: 5px 10px;
+  font-size: 11px;
+  //Instead of the line below you could use @include border-radius($radius, $vertical-radius)
+  border-radius: 2px;
+  border: 1px solid #e7eaec;
+  margin-bottom: 5px;
+  a {
+    color: inherit;
+    &:hover {
+      color: #1ab394;
+    }
+  }
+}
+.user-friends img {
+  width: 42px;
+  height: 42px;
+  margin-bottom: 5px;
+  margin-right: 5px;
+}
+.project-activity {
+  border: 1px solid #e5e5e5;
+  margin-top: 20px;
+}
+.project-doc-icon {
+  width: 40px;
+  height: 40px;
+  border: 1px solid #d9d9d9;
+  border-radius: 0.55rem;
+  i {
+    font-size: 20px;
+    line-height: 40px;
+  }
+}
+.project-name {
+  color: #f68c1f;
+}
+.project-card-header {
+  color: #5b626b;
+  font-size: 17px;
+  line-height: 28px;
+  padding-right: 10px;
+  font-weight: 500;
+  margin-bottom: 10px;
+}

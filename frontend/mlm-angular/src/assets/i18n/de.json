@@ -1,0 +1,84 @@
+{
+  "HEADER":{
+    "SEARCH": {
+      "TEXT": "Suche.."
+    }
+  },
+  "MENUITEMS": {
+    "USER":{
+      "POST": "Manager"
+    },
+    "MAIN": {
+      "TEXT": "Main"
+    },
+    "DASHBOARD": {
+      "TEXT": "Zuhause",
+      "LIST": {
+        "DASHBOARD1": "Dashboard 1",
+        "DASHBOARD2": "Dashboard 2",
+        "DASHBOARD3": "Dashboard 3"
+      }
+    },
+    "ADVANCE-TABLE": {
+      "TEXT": "Vorab-Tabelle"
+    },
+    "APPS": {
+      "TEXT": "Apps"
+    },
+    "CALENDAR": {
+      "TEXT": "Kalender"
+    },
+    "TASK": {
+      "TEXT": "Aufgabe"
+    },
+    "CONTACTS": {
+      "TEXT": "Kontakte"
+    },
+    "EMAIL": {
+      "TEXT": "Email",
+      "LIST": {
+        "INBOX": "Posteingang",
+        "COMPOSE": "Komponieren",
+        "READ": "E-Mail lesen"
+      }
+    },
+    "MORE-APPS": {
+      "TEXT": "Mehr Apps",
+      "LIST": {
+        "CHAT": "Plaudern",
+        "SUPPORT": "Unterstützung",
+        "DRAG-DROP": "Ziehen und loslassen",
+        "CONTACT-GRID": "Kontakt Grid"
+      }
+    },
+    "COMPONENTS": {
+      "TEXT": "Komponenten"
+    },
+    "WIDGETS": {
+      "TEXT": "Widgets",
+      "LIST": {
+        "CHART-WIDGET": "Diagramm-Widget",
+        "DATA-WIDGET": "Daten-Widget"
+      }
+    },
+    "FORMS": {
+      "TEXT": "Formen",
+      "LIST": {
+        "CONTROLS": "Form Controls",
+        "ADVANCE": "Advance Control",
+        "EXAMPLE": "Vorabkontrolle",
+        "VALIDATION": "Formularvalidierung",
+        "WIZARD": "Magier",
+        "EDITORS": "Redakteurinnen"
+      }
+    },
+    "TABLES": {
+      "TEXT": "Tabellen",
+      "LIST": {
+        "BASIC": "Tablas básicas",
+        "MATERIAL": "Materialtabellen",
+        "NGX-DATATABLE": "NGX-datierbar"
+      }
+    }
+  }
+}

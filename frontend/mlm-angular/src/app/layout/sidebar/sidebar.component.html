@@ -1,0 +1,79 @@
+<div>
+  <!-- Left Sidebar -->
+  <aside id="leftsidebar" class="sidebar" (mouseenter)="mouseHover()" (mouseleave)="mouseOut()">
+    <div class="navbar-header">
+      <ul class="nav navbar-nav flex-row">
+        <li class="nav-item logo">
+          <a class="navbar-brand" routerLink="dashboard/dashboard1">
+            <img src="assets/images/logo.png" alt="" />
+            <span class="logo-name">demo domain </span>
+          </a>
+        </li>
+        <li class="nav-item nav-toggle">
+          <button mat-icon-button (click)="callSidemenuCollapse()" class="sidemenu-collapse">
+            <mat-icon [ngStyle]="{'color':'#8F8C91'}" class="menuIcon">{{menuIcon}}</mat-icon>
+          </button>
+        </li>
+      </ul>
+    </div>
+    <!-- Menu -->
+    <div class="menu">
+      
+      <ng-scrollbar [style.height]="listMaxHeight + 'px'" visibility="hover">
+        <ul class="list">
+          <!-- Top Most level menu -->
+          <li *ngFor="let sidebarItem of sidebarItems"
+            [routerLinkActive]="sidebarItem.submenu.length !== 0 ? 'active' : 'active-top'">
+            <div class="header" *ngIf="sidebarItem.groupTitle === true">{{sidebarItem.title | translate}}</div>
+            <a [routerLink]="sidebarItem.class === '' ? [sidebarItem.path] : null" *ngIf="!sidebarItem.groupTitle;"
+              [ngClass]="[sidebarItem.class]" (click)="callToggleMenu($event, sidebarItem.submenu.length)"
+              class="menu-top">
+              <i-feather *ngIf="sidebarItem.iconType=='feather'" [name]="sidebarItem.icon" class="sidebarIcon"></i-feather>
+              <mat-icon *ngIf="sidebarItem.iconType=='material'"  class="sidebarIcon">{{sidebarItem.icon}}</mat-icon>
+              <span class="hide-menu">{{sidebarItem.title | translate}}
+              </span>
+              <span *ngIf="sidebarItem.badge !== '' " [ngClass]="[sidebarItem.badgeClass]">{{sidebarItem.badge}}</span>
+            </a>
+            <!-- First level menu -->
+            <ul class="ml-menu" *ngIf="sidebarItem.submenu.length > 0">
+              <li *ngFor="let sidebarSubItem1 of sidebarItem.submenu"
+                [routerLinkActive]="sidebarSubItem1.submenu.length > 0 ? '' : 'active'">
+                <a [routerLink]="sidebarSubItem1.submenu.length > 0 ? null : [sidebarSubItem1.path]"
+                  (click)="callToggleMenu($event,sidebarSubItem1.submenu.length)" [ngClass]="[sidebarSubItem1.class]">
+                
+                  {{sidebarSubItem1.title | translate}}
+                </a>
+                <!-- Second level menu -->
+                <ul class="ml-menu-2" *ngIf="sidebarSubItem1.submenu.length > 0">
+                  <li *ngFor="let sidebarSubItem2 of sidebarSubItem1.submenu"
+                    [routerLinkActive]="sidebarSubItem2.submenu.length > 0 ? '' : 'active'">
+                    <a [routerLink]="sidebarSubItem2.submenu.length > 0 ? null : [sidebarSubItem2.path]"
+                      (click)="callToggleMenu($event,sidebarSubItem2.submenu.length)"
+                      [ngClass]="[sidebarSubItem2.class]">
+                      {{sidebarSubItem2.title | translate}}
+                    </a>
+                    <!-- Third level menu -->
+                    <ul class="ml-menu-3" *ngIf="sidebarSubItem2.submenu.length > 0">
+                      <li *ngFor="let sidebarSubItem3 of sidebarSubItem2.submenu"
+                        [routerLinkActive]="sidebarSubItem3.submenu.length > 0 ? '' : 'active'">
+                        <a [routerLink]="sidebarSubItem3.submenu.length > 0 ? null : [sidebarSubItem3.path]"
+                          (click)="callToggleMenu($event,sidebarSubItem3.submenu.length)"
+                          [ngClass]="[sidebarSubItem3.class]">
+                          {{sidebarSubItem3.title | translate}}
+                        </a>
+                      </li>
+                    </ul>
+                  </li>
+                </ul>
+              </li>
+            </ul>
+          </li>
+          <li> <a (click)="logout()"><i-feather name="lock" class="sidebarIcon"></i-feather> <span class="hide-menu">Logout
+          </span></a></li>
+        </ul>
+      </ng-scrollbar>
+    </div>
+    <!-- #Menu -->
+  </aside>
+  <!-- #END# Left Sidebar -->
+</div>

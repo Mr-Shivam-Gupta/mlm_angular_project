@@ -1,0 +1,126 @@
+﻿/*
+ *  Document   : _progressbars.scss
+ *  Author     : RedStar Template
+ *  Description: This scss file for progress bars style classes
+ */
+
+.mat-mdc-progress-bar {
+  &.progress-xs {
+    height: 4px;
+  }
+  &.progress-s {
+    height: 5px;
+  }
+  &.progress-m {
+    height: 10px;
+    .mdc-linear-progress__bar-inner {
+      border-top-width: var(--mdc-linear-progress-track-height, 10px);
+    }
+  }
+  &.progress-l {
+    height: 15px;
+    .mdc-linear-progress__bar-inner {
+      border-top-width: 15px;
+    }
+  }
+
+  &.progress-round {
+    border-radius: 7px;
+  }
+
+  &.green-progress .mdc-linear-progress__bar-inner {
+    border-color: #0af30a !important;
+  }
+  &.sky-progress .mdc-linear-progress__bar-inner {
+    border-color: #248afd !important;
+  }
+  &.orange-progress .mdc-linear-progress__bar-inner {
+    border-color: #ffc100 !important;
+  }
+  &.red-progress .mdc-linear-progress__bar-inner {
+    border-color: #ff4747 !important;
+  }
+
+  &.l-green-progress .mdc-linear-progress__bar-inner {
+    background: #11998e; /* fallback for old browsers */
+    background: -webkit-linear-gradient(
+      to right,
+      #38ef7d,
+      #11998e
+    ); /* Chrome 10-25, Safari 5.1-6 */
+    background: linear-gradient(
+      to right,
+      #38ef7d,
+      #11998e
+    ); /* W3C, IE 10+/ Edge, Firefox 16+, Chrome 26+, Opera 12+, Safari 7+ */
+  }
+  &.l-sky-progress .mat-progress-bar-fill::after {
+    background: #36d1dc; /* fallback for old browsers */
+    background: -webkit-linear-gradient(
+      to right,
+      #5b86e5,
+      #36d1dc
+    ); /* Chrome 10-25, Safari 5.1-6 */
+    background: linear-gradient(
+      to right,
+      #5b86e5,
+      #36d1dc
+    ); /* W3C, IE 10+/ Edge, Firefox 16+, Chrome 26+, Opera 12+, Safari 7+ */
+  }
+  &.l-orange-progress .mat-progress-bar-fill::after {
+    background: #f12711; /* fallback for old browsers */
+    background: -webkit-linear-gradient(
+      to right,
+      #f5af19,
+      #f12711
+    ); /* Chrome 10-25, Safari 5.1-6 */
+    background: linear-gradient(
+      to right,
+      #f5af19,
+      #f12711
+    ); /* W3C, IE 10+/ Edge, Firefox 16+, Chrome 26+, Opera 12+, Safari 7+ */
+  }
+  &.l-red-progress .mat-progress-bar-fill::after {
+    background: #ff416c; /* fallback for old browsers */
+    background: -webkit-linear-gradient(
+      to right,
+      #ff4b2b,
+      #ff416c
+    ); /* Chrome 10-25, Safari 5.1-6 */
+    background: linear-gradient(
+      to right,
+      #ff4b2b,
+      #ff416c
+    ); /* W3C, IE 10+/ Edge, Firefox 16+, Chrome 26+, Opera 12+, Safari 7+ */
+  }
+  &.l-purple-progress .mat-progress-bar-fill::after {
+    background: #7f00ff; /* fallback for old browsers */
+    background: -webkit-linear-gradient(
+      to right,
+      #e100ff,
+      #7f00ff
+    ); /* Chrome 10-25, Safari 5.1-6 */
+    background: linear-gradient(
+      to right,
+      #e100ff,
+      #7f00ff
+    ); /* W3C, IE 10+/ Edge, Firefox 16+, Chrome 26+, Opera 12+, Safari 7+ */
+  }
+
+  &.progress-shadow {
+    box-shadow: 0.4rem 0.4rem 0.8rem rgb(0 0 0 / 10%);
+  }
+}
+
+.progress-list {
+  position: relative;
+
+  .status {
+    display: inline-block;
+    font-size: 12px;
+    padding: 6px;
+    position: absolute;
+    right: 0;
+    top: 0;
+  }
+}

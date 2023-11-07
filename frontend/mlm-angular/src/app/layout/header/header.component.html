@@ -1,0 +1,160 @@
+<nav #navbar class="navbar active">
+  <div class="container-fluid">
+    <div class="collapse navbar-collapse">
+      <ul class="float-start collapse-menu-icon">
+        <li>
+          <button mat-icon-button (click)="mobileMenuSidebarOpen($event,'overlay-open')" class="sidemenu-collapse">
+            <app-feather-icons [icon]="'menu'" [class]="'header-icon'"></app-feather-icons>
+          </button>
+        </li>
+      </ul>
+      <!--<ul class="float-start navbar-nav navbar-left">
+        <li class="nav-item btnAppList" ngbDropdown>
+          <button mat-icon-button [matMenuTriggerFor]="appDropdownMenu" class="nav-notification-icons">
+            <app-feather-icons [icon]="'grid'" [class]="'header-icon'"></app-feather-icons>
+          </button>
+          <mat-menu #appDropdownMenu="matMenu" class="notification-dropdown app-dropdown" xPosition="before">
+            <div class="noti-list">
+              <ul class="menu">
+                <li class="nfc-header">
+                  <h5 class="mb-0">Applications</h5>
+                </li>
+                <li>
+                  <div class="row g-0 p-1">
+                    <div class="col-3 text-center"><a routerLink="/apps/chat" class="app-icons">
+                        <img src="assets/images/apps/chat.png">
+                        <p class="tx-12 mb-0">Chat</p>
+                      </a></div>
+                    <div class="col-3 text-center"><a routerLink="/calendar" class="app-icons">
+                        <img src="assets/images/apps/calendar.png">
+                        <p class="tx-12 mb-0">Calendar</p>
+                      </a></div>
+                    <div class="col-3 text-center"><a routerLink="/task" class="app-icons">
+                        <img src="assets/images/apps/task.png">
+                        <p class="tx-12 mb-0">Task</p>
+                      </a></div>
+                    <div class="col-3 text-center"><a routerLink="/email/inbox" class="app-icons">
+                        <img src="assets/images/apps/mail.png">
+                        <p class="tx-12 mb-0">Mail</p>
+                      </a></div>
+                  </div>
+                  <div class="row g-0 p-1">
+                    <div class="col-3 text-center"><a routerLink="/advance-table" class="app-icons">
+                        <img src="assets/images/apps/table.png">
+                        <p class="tx-12 mb-0">Table</p>
+                      </a></div>
+                    <div class="col-3 text-center"><a routerLink="/contacts" class="app-icons">
+                        <img src="assets/images/apps/contact.png">
+                        <p class="tx-12 mb-0">Contact</p>
+                      </a></div>
+                    <div class="col-3 text-center"><a routerLink="/apps/support" class="app-icons">
+                        <img src="assets/images/apps/support.png">
+                        <p class="tx-12 mb-0">Support</p>
+                      </a></div>
+                    <div class="col-3 text-center"><a routerLink="/media/gallery" class="app-icons">
+                        <img src="assets/images/apps/gallery.png">
+                        <p class="tx-12 mb-0">Gallery</p>
+                      </a></div>
+                  </div>
+                </li>
+              </ul>
+            </div>
+          </mat-menu>
+        </li>
+      </ul> -->
+    </div>
+    <div class="collapse navbar-collapse" [ngClass]="isNavbarCollapsed ? '' : 'show'">
+      <ul class="nav navbar-nav navbar-right">
+        <!-- Full Screen Button -->
+        <li class="fullscreen">
+          <button mat-icon-button class="nav-notification-icons" (click)="callFullscreen()">
+            <app-feather-icons [icon]="'maximize'" [class]="'header-icon'"></app-feather-icons>
+          </button>
+        </li>
+        <!-- #END# Full Screen Button --
+        <li class="nav-item">
+          <button mat-icon-button [matMenuTriggerFor]="languagemenu" class="lang-dropdown nav-notification-icons"> <img
+              *ngIf="flagvalue !== undefined" src="{{flagvalue}}" height="16">
+            <img *ngIf="flagvalue === undefined" src="{{defaultFlag}}" height="16"></button>
+          <mat-menu #languagemenu="matMenu" class="lang-item-menu">
+            <div *ngFor="let item of listLang" class="lang-item">
+              <button mat-menu-item class="dropdown-item lang-item-list"
+                (click)="setLanguage(item.text, item.lang, item.flag)"
+                [ngClass]="{'active': langStoreValue === item.lang}">
+                <img src="{{item.flag}}" class="flag-img" height="12"> <span class="align-middle">{{item.text}}</span>
+              </button>
+            </div>
+          </mat-menu>
+        </li>
+        <!-- #START# Notifications--
+        <li>
+          <button mat-icon-button [matMenuTriggerFor]="notificationMenu" class="nav-notification-icons">
+            <app-feather-icons [icon]="'bell'" [class]="'header-icon'"></app-feather-icons>
+          </button>
+          <mat-menu #notificationMenu="matMenu" class="nfc-menu">
+            <div class="nfc-header">
+              <h5 class="mb-0">Notitications</h5>
+              <a class="nfc-mark-as-read">Mark all as read</a>
+            </div>
+            <div class="nfc-dropdown">
+              <ng-scrollbar style="height: 350px" visibility="hover">
+                <div class="noti-list header-menu">
+                  <div class="menu">
+                    <div>
+                      <button mat-menu-item *ngFor="let notification of notifications" onClick="return false;"
+                        [ngClass]="[notification.status]">
+                        <span class="table-img msg-user ">
+                          <i class="material-icons-two-tone nfc-type-icon"
+                            [ngClass]="[notification.color]">{{notification.icon}}</i>
+                        </span>
+                        <span class="menu-info">
+                          <span class="menu-title">{{notification.message}}</span>
+                          <span class="menu-desc mt-2">
+                            <i class="material-icons">access_time</i> {{notification.time}}
+                          </span>
+                        </span>
+                        <span class="nfc-close">
+                          <app-feather-icons [icon]="'x'" [class]="'user-menu-icons'"></app-feather-icons>
+                        </span>
+                      </button>
+                    </div>
+                  </div>
+                </div>
+              </ng-scrollbar>
+            </div>
+            <div class="nfc-footer">
+              <a class="nfc-read-all">Read
+                All Notifications</a>
+            </div>
+          </mat-menu>
+        </li>
+        <!-- #END# Notifications-->
+        <li class="nav-item user_profile">
+          <button mat-button [matMenuTriggerFor]="profilemenu">
+            <div class="chip dropdown-toggle" ngbDropdownToggle class="">
+              <span> {{userid}}</span>
+              
+            </div>
+          </button>
+          <mat-menu #profilemenu="matMenu" class="profile-menu">
+            <div class="noti-list">
+              <div class="menu ">
+                <div class="user_dw_menu">
+                  <mat-label style="padding: 5px;" class="user-item-list"> <app-feather-icons [icon]="'user'" [class]="'user-menu-icons'"></app-feather-icons> {{name}}</mat-label>
+                  <button mat-menu-item class="user-item-list" [routerLink]="['profile/change-password']">
+                    <app-feather-icons [icon]="'user'" [class]="'user-menu-icons'"></app-feather-icons>Change Password
+                  </button>
+                  
+                  <button mat-menu-item (click)="logout()" class="user-item-list">
+                    <app-feather-icons [icon]="'log-out'" [class]="'user-menu-icons'"></app-feather-icons>Logout
+                  </button>
+                </div>
+              </div>
+            </div>
+          </mat-menu>
+        </li>
+        <!-- #END# Tasks -->
+      </ul>
+    </div>
+  </div>
+</nav>

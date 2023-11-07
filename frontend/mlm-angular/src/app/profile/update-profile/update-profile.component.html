@@ -1,0 +1,71 @@
+<section class="content">
+    <div class="content-block">
+      <div class="block-header">
+        <!-- breadcrumb -->
+        <app-breadcrumb [title]="'Profile'" [items]="['Home','Profile']" [active_item]="'Udate Profile'">
+        </app-breadcrumb>
+      </div>
+      <div class="row clearfix">
+        <div class="col-xl-6 col-lg-6 col-md-12 col-sm-12">
+          <div class="card">
+            <div class="header">
+              <h2>Update Profile</h2>
+            </div>
+            <div class="body">
+              <form #myForm="ngForm" class="register-form m-4">
+               
+               
+                <div class="row">
+                    <div class="col-xl-12 col-lg-12 col-md-12 col-sm-12 mb-2">
+                      <mat-form-field class="example-full-width" appearance="outline">
+                        <mat-label>Name</mat-label>
+                        <input matInput [(ngModel)]="name" name="name" [type]="'text'" readonly="">
+                       
+                      </mat-form-field>
+                    </div>
+                  </div>
+                  <div class="row">
+                    <div class="col-xl-12 col-lg-12 col-md-12 col-sm-12 mb-2">
+                      <mat-form-field class="example-full-width" appearance="outline">
+                        <mat-label>Email</mat-label>
+                        <input matInput [(ngModel)]="email" name="email" [type]="'text'" readonly="">
+                       
+                      </mat-form-field>
+                    </div>
+                  </div>
+                  <div class="row">
+                    <div class="col-xl-12 col-lg-12 col-md-12 col-sm-12 mb-2">
+                      <mat-form-field class="example-full-width" appearance="outline">
+                        <mat-label>Mobile</mat-label>
+                        <input matInput [(ngModel)]="mobile" name="mobile" [type]="'text'" readonly="">
+                       
+                      </mat-form-field>
+                    </div>
+                  </div>
+                  <div class="row">
+                    <div class="col-xl-12 col-lg-12 col-md-12 col-sm-12 mb-2">
+                      <mat-form-field class="example-full-width" appearance="outline">
+                        <mat-label>Tron Address</mat-label>
+                        <input matInput [(ngModel)]="address" name="address" [type]="'text'" required [readonly]="!addressError">
+                        <mat-error *ngIf="addressError">
+                          Tron Address is required
+                        </mat-error>
+                      </mat-form-field>
+                    </div>
+                  </div>
+                 
+                <div class="row">
+                  <div class="col-xl-12 col-lg-12 col-md-12 col-sm-12 mb-2">
+                    <button class="btn-space" [disabled]="address.length == 0 || !addressError" mat-raised-button (click)="updateProfile()"
+                      color="primary">Submit</button>
+                    <button type="button" mat-button>Cancel</button>
+                  </div>
+                </div>
+              </form>
+            </div>
+          </div>
+        </div>
+       
+      </div>
+    </div>
+</section>

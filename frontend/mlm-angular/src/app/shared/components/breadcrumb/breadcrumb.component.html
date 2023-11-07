@@ -1,0 +1,20 @@
+<div class="breadcrumb-main">
+    <div class="row">
+        <div class="col-6">
+            <div class="breadcrumb-title">
+                <h4 class="page-title">{{title}}</h4>
+            </div>
+        </div>
+        <div class="col-6">
+            <ul class="breadcrumb-list">
+                <li class="breadcrumb-item bcrumb-1">
+                    <a [routerLink]="'/dashboard'">
+                        <app-feather-icons [icon]="'home'" [class]="'breadcrumb-icon'"></app-feather-icons>
+                    </a>
+                </li>
+                <li class="breadcrumb-item" *ngFor="let item of items">{{item}}</li>
+                <li class="breadcrumb-item active">{{active_item}}</li>
+            </ul>
+        </div>
+    </div>
+</div>
