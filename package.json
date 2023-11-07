@@ -1,0 +1,5 @@
+{
+  "dependencies": {
+    "ngx-bootstrap": "^11.0.2"
+  }
+}
