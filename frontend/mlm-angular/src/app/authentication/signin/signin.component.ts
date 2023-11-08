@@ -51,7 +51,7 @@ export class SigninComponent
       .login(this.f['username'].value, this.f['password'].value)
       .subscribe({
         next: (res: any) => {
-          if (res && res.token) {
+          if (res && res.requestBody) {
             this.router.navigate(['/dashboard/dashboard1']);
           } else {
             this.error = 'Invalid Login';
