@@ -2,13 +2,15 @@ import { Component, OnInit } from '@angular/core';
 import { Router, ActivatedRoute } from '@angular/router';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms'; // Import correct form-related modules
 import { AuthService } from '@core';
+import { UnsubscribeOnDestroyAdapter } from '@shared';
+
 
 @Component({
   selector: 'app-signup',
   templateUrl: './signup.component.html',
   styleUrls: ['./signup.component.scss'],
 })
-export class SignupComponent implements OnInit {
+export class SignupComponent extends UnsubscribeOnDestroyAdapter implements OnInit {
   authForm!:  FormGroup; // Use the correct FormGroup type
   submitted = false;
   returnUrl!: string;
@@ -16,13 +18,16 @@ export class SignupComponent implements OnInit {
   sid: string = ""; 
   hide = true;
   chide = true;// Initialize sid
+  handleError: any;
 
   constructor(
     private formBuilder: FormBuilder, // Use the correct FormBuilder
     private route: ActivatedRoute,
     private router: Router,
     private authService: AuthService
-  ) {}
+  ) {
+    super();
+  }
 
   ngOnInit() {
     let xsid = this.route.snapshot.paramMap.get('sid');
@@ -64,11 +69,26 @@ export class SignupComponent implements OnInit {
 
   onSubmit() {
     this.submitted = true;
-    // stop here if form is invalid
+  
     if (this.authForm.invalid) {
-      return ;
-    } else {
-      this.router.navigate(['/dashboard/dashboard1']);
+      return;
     }
-  }
+  
+    // Call the signup function from your AuthService
+    this.authService.signup(
+      this.f['username'].value,
+      this.f['email'].value,
+      this.f['password'].value
+    )
+    .then((res: any) => {
+      if (res && res.result === 1) {
+        this.router.navigate(['/dashboard/dashboard1']);
+      } else {
+        console.error('Registration failed.');
+      }
+    })
+    .catch((error: any) => {
+      this.handleError(error);
+    });
+  } 
 }
