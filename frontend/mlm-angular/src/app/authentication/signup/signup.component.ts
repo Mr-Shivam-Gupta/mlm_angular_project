@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { Router, ActivatedRoute } from '@angular/router';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms'; // Import correct form-related modules
-import { AuthService } from '../../services.service';
+import { AuthService } from '@core';
 
 @Component({
   selector: 'app-signup',
@@ -30,7 +30,7 @@ export class SignupComponent implements OnInit {
     console.log('sid: ' + vsid);
 
     // Assuming AuthService has a function called checksid
-    this.authService.checkSid(vsid).then((data: any) => {
+    this.authService.checksid(vsid).then((data: any) => {
       let datax: any = data;
       if (datax.result == 0) {
         this.sid = '123456';

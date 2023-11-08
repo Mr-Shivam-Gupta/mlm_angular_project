@@ -48,26 +48,23 @@ export class SigninComponent
       return;
     } else {
       this.subs.sink = this.authService
-        .login(this.f['username'].value, this.f['password'].value)
-        .subscribe({
-          next: (res) => {
-            if (res) {
-              if (res) {
-                const token = this.authService.currentUserValue.token;
-                if (token) {
-                  this.router.navigate(['/dashboard/dashboard1']);
-                }
-              } else {
-                this.error = 'Invalid Login';
-              }
-            } else {
-              this.error = 'Invalid Login';
-            }
-          },
-          error: (error) => {
-            this.error = error;
-            this.submitted = false;
-            this.loading = false;
+      .login(this.f['username'].value, this.f['password'].value)
+      .subscribe({
+        next: (res: any) => {
+          if (res && res.token) {
+            this.router.navigate(['/dashboard/dashboard1']);
+          } else {
+            this.error = 'Invalid Login';
+          }
+        },
+        error: (error: any) => {
+          if (error.status === 500) {
+            this.error = 'Internal Server Error. Please try again later.';
+          } else {
+            this.error = 'An error occurred. Please try again.';
+          }
+          this.submitted = false;
+          this.loading = false;
           },
         });
     }
