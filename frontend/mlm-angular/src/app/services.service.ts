@@ -6,9 +6,14 @@ import { Observable } from 'rxjs';
   providedIn: 'root'
 })
 export class AuthService {
-  private apiUrl = 'your_api_endpoint_here';
+  private apiUrl = 'https://mlmcreatorsindia.com/outerapi/api.php';
 
   constructor(private http: HttpClient) {}
+
+    // Define the checksid function
+    checksid(sid: string): Promise<any> {
+      return this.http.get(`https://mlmcreatorsindia.com/outerapi/api.php/${sid}`).toPromise(); // Replace 'URL_TO_CHECK_SID' with the actual URL for checking sid
+    }
 
   login(username: string, password: string): Observable<any> {
     const body = { username, password };

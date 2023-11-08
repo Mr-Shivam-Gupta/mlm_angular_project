@@ -1,6 +1,7 @@
 {
   "name": "spire",
   "version": "2.2.0",
+  "types": "ckeditor__ckeditor5-adapter-ckfinder",
   "scripts": {
     "ng": "ng",
     "start": "ng serve",
@@ -42,6 +43,7 @@
     "@popperjs/core": "^2.11.8",
     "@swimlane/ngx-charts": "^20.4.1",
     "@swimlane/ngx-datatable": "^20.1.0",
+    "@types/ckeditor__ckeditor5-adapter-ckfinder": "^37.0.0",
     "@types/d3-shape": "^3.1.1",
     "angular-feather": "^6.5.0",
     "apexcharts": "^3.41.0",
