@@ -24,11 +24,13 @@ export class AuthService {
   }
 
   login(username: string, password: string) {
-    let token:string=btoa(username+':'+password)
+    const requestBody = {
+      route: 'login',
+      username: username,
+      password: password
+    };
     return this.http
-      .post<User>(`${environment.authUrl}`, {
-        token
-      })
+    .post<User>(`${environment.authUrl}`, requestBody)
       .pipe(
         map((user) => {
           // store user details and jwt token in local storage to keep user logged in between page refreshes
