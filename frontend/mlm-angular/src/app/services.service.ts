@@ -1,5 +1,5 @@
 import { Injectable } from '@angular/core';
-import { HttpClient } from '@angular/common/http';
+import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Observable } from 'rxjs';
 
 @Injectable({
@@ -10,16 +10,26 @@ export class AuthService {
 
   constructor(private http: HttpClient) {}
 
-    // Define the checksid function
-    checksid(sid: string): Promise<any> {
-      return this.http.get(`https://mlmcreatorsindia.com/outerapi/api.php/${sid}`).toPromise(); // Replace 'URL_TO_CHECK_SID' with the actual URL for checking sid
-    }
+  checkSid(sid: string): Observable<any> {
+    const data = {
+      route: 'checksid',
+      sid: sid
+    };
+
+    const httpOptions = {
+      headers: new HttpHeaders({
+        'Content-Type': 'application/json'
+      })
+    };
+
+    return this.http.post(`${this.apiUrl}/checksid`, data, httpOptions);
+  }
 
   login(username: string, password: string): Observable<any> {
     const body = { username, password };
     return this.http.post(this.apiUrl, body);
   }
-  
+
   register(username: string, password: string, email: string): Observable<any> {
     const body = { username, password, email };
     return this.http.post(this.apiUrl, body);

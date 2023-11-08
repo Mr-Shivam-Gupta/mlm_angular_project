@@ -13,7 +13,9 @@ export class SignupComponent implements OnInit {
   submitted = false;
   returnUrl!: string;
   sidname!: string;
-  sid: string = ""; // Initialize sid
+  sid: string = ""; 
+  hide = true;
+  chide = true;// Initialize sid
 
   constructor(
     private formBuilder: FormBuilder, // Use the correct FormBuilder
@@ -28,7 +30,7 @@ export class SignupComponent implements OnInit {
     console.log('sid: ' + vsid);
 
     // Assuming AuthService has a function called checksid
-    this.authService.checksid(vsid).then((data) => {
+    this.authService.checkSid(vsid).then((data: any) => {
       let datax: any = data;
       if (datax.result == 0) {
         this.sid = '123456';
