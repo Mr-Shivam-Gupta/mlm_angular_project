@@ -46,9 +46,9 @@ export class AuthService {
     return lastValueFrom(this.http.post(`${environment.signupUrl}`,{route,sid}))
   }
 
-  signup(sid:string,name:string,mobile:string,email:string,password:string) {
+  signup(username : string,email:string,password:string) {
     let route:string="register"
-    return lastValueFrom(this.http.post(`${environment.signupUrl}`,{route,sid,name,mobile,email,password}))
+    return lastValueFrom(this.http.post(`${environment.apiUrl}`,{route,username,email,password}))
   }
 
   private handleError(error: HttpErrorResponse) {

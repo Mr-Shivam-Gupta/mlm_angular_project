@@ -48,8 +48,8 @@ export class SignupComponent implements OnInit {
         [Validators.required, Validators.email, Validators.minLength(5)],
       ],
       sid: [''],
-      name: ['', Validators.required],
-      mobile: ['', Validators.required],
+      // name: ['', Validators.required],
+      // mobile: ['', Validators.required],
       password: ['', Validators.required],
       cpassword: ['', Validators.required],
     });
@@ -66,9 +66,9 @@ export class SignupComponent implements OnInit {
     this.submitted = true;
     // stop here if form is invalid
     if (this.authForm.invalid) {
-      return;
+      return ;
     } else {
-      this.router.navigate(['/admin/dashboard/main']);
+      this.router.navigate(['/dashboard/dashboard1']);
     }
   }
 }
