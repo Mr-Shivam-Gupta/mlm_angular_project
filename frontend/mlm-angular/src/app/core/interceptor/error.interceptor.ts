@@ -23,7 +23,7 @@ export class ErrorInterceptor implements HttpInterceptor {
         if (err.status === 401) {
           // auto logout if 401 response returned from api
           this.authenticationService.logout().then();
-          window.location.href = 'https://mlmcreatorsindia.com/outerapi/api.php';
+          window.location.href = 'https://www.demodomain.com';
         }
 
         const error = err.error.message || err.statusText;

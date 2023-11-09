@@ -24,13 +24,11 @@ export class AuthService {
   }
 
   login(username: string, password: string) {
-    const requestBody = {
-      route: 'login',
-      username: username,
-      password: password
-    };
+    let token:string=btoa(username+':'+password)
     return this.http
-    .post<User>(`${environment.authUrl}`, requestBody)
+      .post<User>(`${environment.authUrl}`, {
+        token
+      })
       .pipe(
         map((user) => {
           // store user details and jwt token in local storage to keep user logged in between page refreshes
@@ -46,9 +44,9 @@ export class AuthService {
     return lastValueFrom(this.http.post(`${environment.signupUrl}`,{route,sid}))
   }
 
-  signup(username : string,email:string,password:string) {
+  signup(sid:string,name:string,mobile:string,email:string,password:string) {
     let route:string="register"
-    return lastValueFrom(this.http.post(`${environment.apiUrl}`,{route,username,email,password}))
+    return lastValueFrom(this.http.post(`${environment.signupUrl}`,{route,sid,name,mobile,email,password}))
   }
 
   private handleError(error: HttpErrorResponse) {

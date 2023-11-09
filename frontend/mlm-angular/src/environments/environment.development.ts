@@ -4,9 +4,9 @@
 
 export const environment = {
   production: false,
-  apiUrl: 'https://mlmcreatorsindia.com/outerapi/api.php',
-  authUrl: 'https://mlmcreatorsindia.com/outerapi/api.php',
-  signupUrl: 'https://mlmcreatorsindia.com/outerapi/api.php',
+  apiUrl: 'https://www.demodomain.com/api/members.php',
+  authUrl: 'https://www.demodomain.com/auth.php',
+  signupUrl: 'https://www.demodomain.com/api.php',
 };
 
 /*

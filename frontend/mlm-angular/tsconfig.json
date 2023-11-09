@@ -1,10 +1,11 @@
+/* To learn more about this file see: https://angular.io/config/tsconfig. */
 {
   "compileOnSave": false,
   "compilerOptions": {
     "baseUrl": "src",
     "outDir": "./dist/out-tsc",
     "forceConsistentCasingInFileNames": true,
-    "strict": false,
+    "strict": true,
     "noImplicitOverride": true,
     "noPropertyAccessFromIndexSignature": true,
     "noImplicitReturns": true,
@@ -29,8 +30,8 @@
       "@shared": ["app/shared"],
       "@shared/*": ["app/shared/*"],
       "@config": ["app/config"],
-      "@config/*": ["app/config/*"]
-    }
+      "@config/*": ["app/config/*"],
+    },
   },
   "angularCompilerOptions": {
     "enableI18nLegacyMessageIdFormat": false,

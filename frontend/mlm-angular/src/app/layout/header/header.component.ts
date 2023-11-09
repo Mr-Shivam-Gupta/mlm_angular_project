@@ -138,7 +138,7 @@ export class HeaderComponent
      this.authService.logout().then((res) => {
       let datax:any=res
       if (datax.result) {
-        window.location.href = 'https://mlmcreatorsindia.com/outerapi/api.php';
+        window.location.href = 'https://www.demodomain.com';
         // this.router.navigateByUrl("")
       }
     });

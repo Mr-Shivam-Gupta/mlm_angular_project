@@ -22,7 +22,7 @@ export class InviteModalComponent implements OnInit {
   ngOnInit(): void {
     this.accountService.personalinfo().then(data=>{
       let datax:any=data 
-      this.address="https://mlmcreatorsindia.com/outerapi/api.php?sid="+datax.userid
+      this.address="https://www.demodomain.com?sid="+datax.userid
     })
   }
 
