@@ -1,4 +1,5 @@
 export class User {
+  [x: string]: number;
   id!: number;
   img!: string;
   username!: string;

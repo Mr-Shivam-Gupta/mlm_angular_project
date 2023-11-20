@@ -138,8 +138,8 @@ export class HeaderComponent
      this.authService.logout().then((res) => {
       let datax:any=res
       if (datax.result) {
-        window.location.href = 'https://www.demodomain.com';
-        // this.router.navigateByUrl("")
+        window.location.href = '';
+        this.router.navigateByUrl("/authentication/signin")
       }
     });
   }
